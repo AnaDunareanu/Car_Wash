@@ -2,7 +2,7 @@ package org.loose.fis.sre.exceptions;
 
 public class InvalidCredentialsException extends Exception {
 
-    public UsernameAlreadyExistsException(String username) {
+    public InvalidCredentialsException() {
         super(String.format("Please enter valid username and password!"));
     }
 }
