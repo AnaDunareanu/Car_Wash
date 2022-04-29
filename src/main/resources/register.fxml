@@ -21,13 +21,18 @@
 
     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-    <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+    <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
     </ChoiceBox>
 
-    <Text fx:id="registrationMessage" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <Text fx:id="registrationMessage" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6">
         <Button onAction="#handleRegisterAction" text="Register"/>
     </HBox>
+
 </GridPane>

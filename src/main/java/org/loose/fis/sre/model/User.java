@@ -7,11 +7,13 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private String email;
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.email = email;
     }
 
     public User() {
@@ -41,6 +43,12 @@ public class User {
         this.role = role;
     }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,6 +58,7 @@ public class User {
 
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return role != null ? role.equals(user.role) : user.role == null;
     }
 
