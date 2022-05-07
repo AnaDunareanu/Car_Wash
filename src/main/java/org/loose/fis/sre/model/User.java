@@ -6,12 +6,14 @@ public class User {
     @Id
     private String username;
     private String password;
+    private String email;
     private String role;
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.email = email;
     }
 
     public User() {
@@ -33,6 +35,14 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getRole() {
         return role;
     }
@@ -50,6 +60,7 @@ public class User {
 
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return role != null ? role.equals(user.role) : user.role == null;
     }
 
