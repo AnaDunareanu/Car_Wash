@@ -23,7 +23,7 @@
 
     <Text fx:id="loginMessage" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button onAction="#handleLoginAction" text="Login"/>
+        <Button fx:id="but" onAction="#handleLoginAction" text="Login"/>
     </HBox>
 
     <Text id="title-text" text="Register" GridPane.columnIndex="1" GridPane.columnSpan="2"
