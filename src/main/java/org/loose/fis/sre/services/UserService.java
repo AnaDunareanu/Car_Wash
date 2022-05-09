@@ -1,7 +1,9 @@
 package org.loose.fis.sre.services;
 
+import javafx.beans.property.Property;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.exceptions.InvalidCredentialsException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.model.User;
 
@@ -24,6 +26,10 @@ public class UserService {
         userRepository = database.getRepository(User.class);
     }
 
+    public static ObjectRepository<User> getUserRepository() {
+        return userRepository;
+    }
+
     public static void addUser(String username, String password, String email, String role) throws UsernameAlreadyExistsException {
         checkUserDoesNotAlreadyExist(username);
         userRepository.insert(new User(username, encodePassword(username, password), email, role));
@@ -34,6 +40,19 @@ public class UserService {
             if (Objects.equals(username, user.getUsername()))
                 throw new UsernameAlreadyExistsException(username);
         }
+    }
+
+    public static void verifyUser(String username, String password) throws InvalidCredentialsException {
+        checkCredentials(username,password);
+    }
+
+    private static void checkCredentials(String username, String password) throws InvalidCredentialsException {
+
+        for (User user : userRepository.find()) {
+            if (Objects.equals(username, user.getUsername()) && Objects.equals(encodePassword(username,password), user.getPassword()))
+                return;
+        }
+        throw new InvalidCredentialsException();
     }
 
     private static String encodePassword(String salt, String password) {
@@ -56,6 +75,5 @@ public class UserService {
         }
         return md;
     }
-
 
 }

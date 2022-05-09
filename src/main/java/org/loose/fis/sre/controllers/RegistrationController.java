@@ -1,17 +1,37 @@
 package org.loose.fis.sre.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.exceptions.InvalidCredentialsException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.services.UserService;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import static org.loose.fis.sre.services.UserService.getUserRepository;
 
 public class RegistrationController {
 
     @FXML
     private Text registrationMessage;
+    @FXML
+    private Text loginMessage;
+    @FXML
+    private PasswordField passwordFieldLogin;
+    @FXML
+    private TextField usernameFieldLogin;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -33,6 +53,48 @@ public class RegistrationController {
             registrationMessage.setText("Account created successfully!");
         } catch (UsernameAlreadyExistsException e) {
             registrationMessage.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    private Button but;
+
+    @FXML
+    public void handleLoginAction(javafx.event.ActionEvent event)
+    {
+        try {
+            UserService.verifyUser(usernameFieldLogin.getText(), passwordFieldLogin.getText());
+            Stage stage= (Stage) but.getScene().getWindow();
+            String username = usernameFieldLogin.getText();
+
+            stage.close();
+
+            ObjectRepository<User> userRepository = getUserRepository();
+
+            String role = "";
+            for (User user : userRepository.find()) {
+                if (Objects.equals(username, user.getUsername()))
+                    role = (String) user.getRole();
+            }
+
+            if(role.equals("Client")) {
+                Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
+                Scene scene = new Scene(login);
+                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                appStage.setScene(scene);
+                appStage.show();
+            }
+
+            if(role.equals("Admin")) {
+                Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("MyCarWashPage.fxml"));
+                Scene scene = new Scene(login);
+                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                appStage.setScene(scene);
+                appStage.show();
+            }
+
+        } catch (InvalidCredentialsException | IOException e) {
+            loginMessage.setText(e.getMessage());
         }
     }
 }
