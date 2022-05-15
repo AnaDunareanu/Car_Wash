@@ -1,0 +1,57 @@
+package org.loose.fis.sre.model;
+
+import org.dizitart.no2.objects.Id;
+
+public class CarWash {
+    @Id
+    private String carwashname;
+    private String administrator;
+    private String adress;
+
+    public CarWash(String carwashname, String adress, String administartor) {
+        this.carwashname = carwashname;
+        this.adress = adress;
+        this.administrator = administartor;
+    }
+
+    public CarWash() {
+    }
+
+    public String getCarWashName() {
+        return carwashname;
+    }
+
+    public void setCarWashName(String carwashname) {
+        this.carwashname = carwashname;
+    }
+
+    public String getCarWashAdress() {
+        return adress;
+    }
+
+    public void setCarWashAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(String administrator) {
+        this.administrator = administrator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CarWash carwash = (CarWash) o;
+
+        if (carwashname != null ? !carwashname.equals(carwash.carwashname) : carwash.carwashname != null) return false;
+        if (adress != null ? !adress.equals(carwash.adress) : carwash.adress != null) return false;
+        if (administrator != null ? !administrator.equals(carwash.administrator) : carwash.administrator != null) return false;
+        return true;
+    }
+
+}
