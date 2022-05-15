@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.loose.fis.sre.services.CarWashService;
 import org.loose.fis.sre.services.FileSystemService;
 import org.loose.fis.sre.services.UserService;
 
@@ -21,6 +22,7 @@ public class Main extends Application {
         primaryStage.setTitle("Car Wash Registration");
         primaryStage.setScene(new Scene(root, 400, 500));
         primaryStage.show();
+        CarWashService.initDatabase();
     }
 
     private void initDirectory() {
