@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.loose.fis.sre.services.CarWashService;
 import org.loose.fis.sre.services.FileSystemService;
 import org.loose.fis.sre.services.UserService;
+import org.loose.fis.sre.services.WashTypeService;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,10 +20,11 @@ public class Main extends Application {
         initDirectory();
         UserService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-        primaryStage.setTitle("Car Wash Registration");
+        primaryStage.setTitle("Car Wash Login or Register");
         primaryStage.setScene(new Scene(root, 400, 500));
         primaryStage.show();
         CarWashService.initDatabase();
+        WashTypeService.initDatabase();
     }
 
     private void initDirectory() {
