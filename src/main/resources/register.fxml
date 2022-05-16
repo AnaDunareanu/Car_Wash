@@ -48,6 +48,6 @@
 
     <Text fx:id="registrationMessage" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="14">
-        <Button onAction="#handleRegisterAction" text="Register"/>
+        <Button fx:id="register" onAction="#handleRegisterAction" text="Register"/>
     </HBox>
 </GridPane>
