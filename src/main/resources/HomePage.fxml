@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.loose.fis.sre.controllers.HomePageController">
 
-    <Label layoutX="240.0" layoutY="50.0" text="Home Page">
-         <font>
-            <Font size="20.0" />
-         </font></Label>
+    <Label layoutX="246.0" layoutY="45.0" text="Welcome "/>
+    <Text fx:id="loggedUser" layoutX="299.0" layoutY="58.0" wrappingWidth="150.99999490380287" />
+    <Label text="Car washes" layoutX="199.0" layoutY="80.0"/>
+   <ListView fx:id="CarWashList" onMouseClicked="#handleMouseClicked" layoutX="199.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
 
 </AnchorPane>
