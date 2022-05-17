@@ -4,6 +4,7 @@ import org.dizitart.no2.objects.Id;
 
 public class WashType {
     @Id
+    private String username;
     private String carwashname;
     private String nume;
 
