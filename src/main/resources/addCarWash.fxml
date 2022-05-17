@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.AddCarWashController">
+
+    <Label layoutX="200.0" layoutY="50.0" text="Add Your Car Wash">
+        <font>
+            <Font size="14.0" />
+        </font></Label>
+
+    <Label layoutX="154.0" layoutY="145.0" text="Car Wash Name: " />
+
+    <TextField fx:id="carwashnameField" layoutX="251.0" layoutY="141.0" />
+
+    <Label layoutX="203.0" layoutY="184.0" text="Address: " />
+
+    <TextField fx:id="addressField" layoutX="251.0" layoutY="180.0" />
+
+    <Button layoutX="363.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleAddCarWashAction" text="Add" />
+
+    <Text fx:id="addCarWashMessage" layoutX="203.0" layoutY="287.0" wrappingWidth="197.99999499320984" />
+</AnchorPane>

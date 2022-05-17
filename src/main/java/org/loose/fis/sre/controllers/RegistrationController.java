@@ -47,11 +47,36 @@ public class RegistrationController {
     }
 
     @FXML
-    public void handleRegisterAction() {
+    private Button register;
+    @FXML
+    public void handleRegisterAction(javafx.event.ActionEvent event) {
         try {
             UserService.addUser(usernameField.getText(), passwordField.getText(), emailField.getText(), (String) role.getValue());
+            String username = usernameField.getText();
+
+            ObjectRepository<User> userRepository = getUserRepository();
+            String role = "";
+            for (User user : userRepository.find()) {
+                if (Objects.equals(username, user.getUsername()))
+                    role = (String) user.getRole();
+            }
+
+            if(role.equals("Admin")) {
+                //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("addCarWash.fxml"));
+                Stage stage= (Stage) register.getScene().getWindow();
+                stage.close();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("addCarWash.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                AddCarWashController ACcontroller = loader.getController();
+                ACcontroller.setAdmin(username);
+                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                appStage.setTitle("Add your car wash");
+                appStage.setScene(scene);
+                appStage.show();
+            }
             registrationMessage.setText("Account created successfully!");
-        } catch (UsernameAlreadyExistsException e) {
+        } catch (UsernameAlreadyExistsException | IOException e) {
             registrationMessage.setText(e.getMessage());
         }
     }
@@ -65,10 +90,8 @@ public class RegistrationController {
         try {
             UserService.verifyUser(usernameFieldLogin.getText(), passwordFieldLogin.getText());
             Stage stage= (Stage) but.getScene().getWindow();
-            String username = usernameFieldLogin.getText();
-
             stage.close();
-
+            String username = usernameFieldLogin.getText();
             ObjectRepository<User> userRepository = getUserRepository();
 
             String role = "";
@@ -78,9 +101,14 @@ public class RegistrationController {
             }
 
             if(role.equals("Client")) {
-                Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
+                //Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomePage.fxml"));
+                Parent login = loader.load();
                 Scene scene = new Scene(login);
+                HomePageController controller = loader.getController();
+                controller.setLoggedUser(username);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                appStage.setTitle("Home Page");
                 appStage.setScene(scene);
                 appStage.show();
             }

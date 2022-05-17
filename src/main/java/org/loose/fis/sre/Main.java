@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.loose.fis.sre.services.CarWashService;
 import org.loose.fis.sre.services.FileSystemService;
 import org.loose.fis.sre.services.UserService;
 
@@ -18,9 +19,10 @@ public class Main extends Application {
         initDirectory();
         UserService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-        primaryStage.setTitle("Car Wash Registration");
+        primaryStage.setTitle("Car Wash Login or Register");
         primaryStage.setScene(new Scene(root, 400, 500));
         primaryStage.show();
+        CarWashService.initDatabase();
     }
 
     private void initDirectory() {
