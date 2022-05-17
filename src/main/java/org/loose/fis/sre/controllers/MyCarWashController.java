@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static org.loose.fis.sre.services.CarWashService.getCarWashRepository;
-import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
+import static org.loose.fis.sre.services.WashTypeService.*;
 
 
 public class MyCarWashController {
@@ -53,13 +53,13 @@ public class MyCarWashController {
 
     private String LoggedUser;
 
-    ObjectRepository<WashType> WashTypeRepository = getTypeRepository();
-
     @FXML
     public void initialize()
     {
-        for(WashType wash :  WashTypeRepository.find())
-            WashTypeList.getItems().add(wash.getWashTypeName());
+        if(getSelectedWashTypesNum()>0) {
+            for(String wash :  getSelectedWashTypes())
+                WashTypeList.getItems().add(wash);
+        }
     }
 
     @FXML

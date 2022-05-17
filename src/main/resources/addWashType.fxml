@@ -14,7 +14,7 @@
 
       <TextField fx:id="washTypeField" layoutX="204.0" layoutY="89.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
       <Text fx:id="washTypeMessage" layoutX="180.0" layoutY="143.0" wrappingWidth="208.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <Button fx:id="AddWashType" layoutX="126.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAddWashType" text="Add" />
+      <Button fx:id="AddWashType" onAction="#handleAddWashType" layoutX="126.0" layoutY="200.0" text="Add" />
       <Button fx:id="DeleteWashType" onAction="#handleDelete" layoutX="373.0" layoutY="200.0" text="Delete" />
       <Button fx:id="GoBack" onAction="#handleGoBack" layoutX="14.0" layoutY="14.0" text="Go Back" />
    </children>

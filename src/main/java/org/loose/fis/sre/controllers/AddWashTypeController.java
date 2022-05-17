@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static org.loose.fis.sre.services.UserService.getUserRepository;
+import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypesNum;
 import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
 
 public class AddWashTypeController {
@@ -53,7 +54,11 @@ public class AddWashTypeController {
     @FXML
     public void handleAddWashType(javafx.event.ActionEvent event) {
         try {
-            WashTypeService.addWashType(CarWashName, washTypeField.getText());
+            WashTypeService.addSelectedWashType(washTypeField.getText());
+            System.out.println("NUMAR SELECTED WASH TYPES: " + WashTypeService.getSelectedWashTypesNum());
+            for(String washType : WashTypeService.getSelectedWashTypes()){
+                System.out.println(washType);
+            }
             washTypeMessage.setText("Wash Type added successfully!");
         } catch (WashTypeAlreadyExists e) {
             washTypeMessage.setText(e.getMessage());
@@ -76,7 +81,7 @@ public class AddWashTypeController {
     @FXML
     public void handleDelete(javafx.event.ActionEvent event) {
         try {
-            WashTypeService.deleteWashType(CarWashName, washTypeField.getText());
+            WashTypeService.deleteWashType(washTypeField.getText());
             washTypeMessage.setText("Wash Type deleted successfully!");
         } catch (WashTypeDoesNotAlreadyExists e) {
             washTypeMessage.setText(e.getMessage());
