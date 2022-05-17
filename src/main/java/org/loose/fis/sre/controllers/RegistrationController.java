@@ -14,12 +14,14 @@ import javafx.stage.Stage;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.InvalidCredentialsException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.model.CarWash;
 import org.loose.fis.sre.model.User;
 import org.loose.fis.sre.services.UserService;
 
 import java.io.IOException;
 import java.util.Objects;
 
+import static org.loose.fis.sre.services.CarWashService.getCarWashRepository;
 import static org.loose.fis.sre.services.UserService.getUserRepository;
 
 public class RegistrationController {
@@ -93,12 +95,15 @@ public class RegistrationController {
             stage.close();
             String username = usernameFieldLogin.getText();
             ObjectRepository<User> userRepository = getUserRepository();
+            ObjectRepository<CarWash> carWashRepository = getCarWashRepository();
 
             String role = "";
             for (User user : userRepository.find()) {
                 if (Objects.equals(username, user.getUsername()))
                     role = (String) user.getRole();
             }
+
+
 
             if(role.equals("Client")) {
                 //Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
@@ -114,7 +119,16 @@ public class RegistrationController {
             }
 
             if(role.equals("Admin")) {
-                Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("MyCarWashPage.fxml"));
+                String carWash = "";
+                for (CarWash carWash1 : carWashRepository.find()) {
+                    if (Objects.equals(username, carWash1.getAdministrator()))
+                        carWash = (String) carWash1.getCarWashName();
+                }
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MyCarWashPage.fxml"));
+                Parent login = loader.load();
+                MyCarWashController controller = loader.getController();
+                controller.setLoggedUser(username);
+                controller.setCarWashName(carWash);
                 Scene scene = new Scene(login);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(scene);
