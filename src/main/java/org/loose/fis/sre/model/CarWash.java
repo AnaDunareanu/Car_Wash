@@ -6,11 +6,11 @@ public class CarWash {
     @Id
     private String carwashname;
     private String administrator;
-    private String adress;
+    private String address;
 
     public CarWash(String carwashname, String adress, String administartor) {
         this.carwashname = carwashname;
-        this.adress = adress;
+        this.address = adress;
         this.administrator = administartor;
     }
 
@@ -25,12 +25,12 @@ public class CarWash {
         this.carwashname = carwashname;
     }
 
-    public String getCarWashAdress() {
-        return adress;
+    public String getCarWashAddress() {
+        return address;
     }
 
-    public void setCarWashAdress(String adress) {
-        this.adress = adress;
+    public void setCarWashAddress(String address) {
+        this.address = address;
     }
 
     public String getAdministrator() {
@@ -49,7 +49,7 @@ public class CarWash {
         CarWash carwash = (CarWash) o;
 
         if (carwashname != null ? !carwashname.equals(carwash.carwashname) : carwash.carwashname != null) return false;
-        if (adress != null ? !adress.equals(carwash.adress) : carwash.adress != null) return false;
+        if (address != null ? !address.equals(carwash.address) : carwash.address != null) return false;
         if (administrator != null ? !administrator.equals(carwash.administrator) : carwash.administrator != null) return false;
         return true;
     }

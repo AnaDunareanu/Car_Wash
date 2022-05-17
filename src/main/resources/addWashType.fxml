@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.AddWashTypeController">
+
+   <children>
+      <Label layoutX="99.0" layoutY="92.0" text="Washing Type:" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+
+      <TextField fx:id="washTypeField" layoutX="204.0" layoutY="89.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <Text fx:id="washTypeMessage" layoutX="180.0" layoutY="143.0" wrappingWidth="208.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <Button fx:id="AddWashType" layoutX="126.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleAddWashType" text="Add" />
+      <Button fx:id="DeleteWashType" onAction="#handleDelete" layoutX="373.0" layoutY="200.0" text="Delete" />
+      <Button fx:id="GoBack" onAction="#handleGoBack" layoutX="14.0" layoutY="14.0" text="Go Back" />
+   </children>
+</AnchorPane>

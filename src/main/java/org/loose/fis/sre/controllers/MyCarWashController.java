@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -47,6 +48,9 @@ public class MyCarWashController {
         CarWashName.setText(name);
     }
 
+    @FXML
+    private Button modify;
+
     private String LoggedUser;
 
     ObjectRepository<WashType> WashTypeRepository = getTypeRepository();
@@ -58,4 +62,16 @@ public class MyCarWashController {
             WashTypeList.getItems().add(wash.getWashTypeName());
     }
 
+    @FXML
+    public void handleModify(javafx.event.ActionEvent event) throws IOException {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("addWashType.fxml"));
+            Parent login = loader.load();
+            AddWashTypeController controller = loader.getController();
+            controller.setCarWashName(CarWashName.getText());
+            Scene scene = new Scene(login);
+            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.show();
+    }
 }

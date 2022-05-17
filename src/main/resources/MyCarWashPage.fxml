@@ -4,7 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.MyCarWashController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.loose.fis.sre.controllers.MyCarWashController">
 
     <Text fx:id="CarWashName" layoutX="147.0" layoutY="58.0" textAlignment="CENTER" wrappingWidth="266.0">
       <font>
@@ -17,5 +19,6 @@
         </font></Label>
 
     <ListView fx:id="WashTypeList" layoutX="180.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" />
+   <Button fx:id="modify" onAction="#handleModify" layoutX="406.0" layoutY="332.0" mnemonicParsing="false" text="Add/Delete Washing Type" />
 
 </AnchorPane>

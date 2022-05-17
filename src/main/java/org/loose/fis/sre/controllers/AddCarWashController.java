@@ -20,7 +20,7 @@ public class AddCarWashController {
     @FXML
     private TextField carwashnameField;
     @FXML
-    private TextField adressField;
+    private TextField addressField;
 
     private String administratorName;
     @FXML
@@ -31,7 +31,7 @@ public class AddCarWashController {
     @FXML
     public void handleAddCarWashAction(javafx.event.ActionEvent event) {
         try {
-            CarWashService.addCarWash(carwashnameField.getText(), adressField.getText(), administratorName);
+            CarWashService.addCarWash(carwashnameField.getText(), addressField.getText(), administratorName);
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("register.fxml"));
             Parent login = loader.load();
             Scene scene = new Scene(login);
