@@ -24,9 +24,9 @@ public class CarWashService {
         return carwashRepository;
     }
 
-    public static void addCarWash(String carwashname, String adress, String administrator) throws CarWashAlreadyExistsException {
+    public static void addCarWash(String carwashname, String address, String administrator) throws CarWashAlreadyExistsException {
         checkCarWashAlreadyExists(carwashname);
-        carwashRepository.insert(new CarWash(carwashname, adress, administrator));
+        carwashRepository.insert(new CarWash(carwashname, address, administrator));
     }
 
     private static void checkCarWashAlreadyExists(String carwashname) throws CarWashAlreadyExistsException {

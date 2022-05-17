@@ -15,9 +15,9 @@
 
     <TextField fx:id="carwashnameField" layoutX="251.0" layoutY="141.0" />
 
-    <Label layoutX="203.0" layoutY="184.0" text="Adress: " />
+    <Label layoutX="203.0" layoutY="184.0" text="Address: " />
 
-    <TextField fx:id="adressField" layoutX="251.0" layoutY="180.0" />
+    <TextField fx:id="addressField" layoutX="251.0" layoutY="180.0" />
 
     <Button layoutX="363.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleAddCarWashAction" text="Add" />
 
