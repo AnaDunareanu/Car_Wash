@@ -8,9 +8,9 @@ public class CarWash {
     private String administrator;
     private String address;
 
-    public CarWash(String carwashname, String adress, String administartor) {
+    public CarWash(String carwashname, String address, String administartor) {
         this.carwashname = carwashname;
-        this.address = adress;
+        this.address = address;
         this.administrator = administartor;
     }
 
@@ -25,12 +25,12 @@ public class CarWash {
         this.carwashname = carwashname;
     }
 
-    public String getCarWashAddress() {
+    public String getCarWashAdress() {
         return address;
     }
 
-    public void setCarWashAddress(String address) {
-        this.address = address;
+    public void setCarWashAdress(String adress) {
+        this.address = adress;
     }
 
     public String getAdministrator() {

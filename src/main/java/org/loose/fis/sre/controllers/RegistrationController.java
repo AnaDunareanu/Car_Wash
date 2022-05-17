@@ -57,7 +57,6 @@ public class RegistrationController {
             String username = usernameField.getText();
 
             ObjectRepository<User> userRepository = getUserRepository();
-
             String role = "";
             for (User user : userRepository.find()) {
                 if (Objects.equals(username, user.getUsername()))
@@ -93,10 +92,8 @@ public class RegistrationController {
         try {
             UserService.verifyUser(usernameFieldLogin.getText(), passwordFieldLogin.getText());
             Stage stage= (Stage) but.getScene().getWindow();
-            String username = usernameFieldLogin.getText();
-
             stage.close();
-
+            String username = usernameFieldLogin.getText();
             ObjectRepository<User> userRepository = getUserRepository();
             ObjectRepository<CarWash> carWashRepository = getCarWashRepository();
 
@@ -109,8 +106,12 @@ public class RegistrationController {
 
 
             if(role.equals("Client")) {
-                Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
+                //Parent login = FXMLLoader.load(getClass().getClassLoader().getResource("HomePage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomePage.fxml"));
+                Parent login = loader.load();
                 Scene scene = new Scene(login);
+                HomePageController controller = loader.getController();
+                controller.setLoggedUser(username);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setTitle("Home Page");
                 appStage.setScene(scene);
@@ -130,7 +131,6 @@ public class RegistrationController {
                 controller.setCarWashName(carWash);
                 Scene scene = new Scene(login);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                appStage.setTitle("My Car Wash Page");
                 appStage.setScene(scene);
                 appStage.show();
             }
