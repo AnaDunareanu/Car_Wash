@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.loose.fis.sre.controllers.AppointmentDetailsController">
+
+    <Label layoutX="200" layoutY="60.0" text="Complete Appointment Details">
+        <font>
+            <Font size="14.0" />
+        </font></Label>
+    <Label layoutX="200" layoutY="140" text="Number of coins: " />
+    <Spinner fx:id="nCoins" layoutX="300.0" layoutY="136.0" prefHeight="25.0" prefWidth="100.0" />
+    <Label layoutX="200" layoutY="180.0" text="Start time: " />
+    <Spinner fx:id="sTime" layoutX="300.0" layoutY="176.0" prefHeight="25.0" prefWidth="100.0" />
+    <Button onAction="#handleMakeAppointmentAction" layoutX="282.0" layoutY="240.0" text="Make appointment" />
+    <Button onAction="#handleBackAction" layoutX="14.0" layoutY="14.0" text="Go back"/>
+    <Text fx:id="appointmentMessage" layoutX="250" layoutY="290" />
+</AnchorPane>
