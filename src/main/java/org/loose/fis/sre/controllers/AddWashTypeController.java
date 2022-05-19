@@ -55,7 +55,6 @@ public class AddWashTypeController {
     public void handleAddWashType(javafx.event.ActionEvent event) {
         try {
             WashTypeService.addSelectedWashType(washTypeField.getText());
-            System.out.println("NUMAR SELECTED WASH TYPES: " + WashTypeService.getSelectedWashTypesNum());
             for(String washType : WashTypeService.getSelectedWashTypes()){
                 System.out.println(washType);
             }
