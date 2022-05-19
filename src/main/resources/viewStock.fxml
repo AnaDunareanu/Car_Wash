@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
+            fx:controller="org.loose.fis.sre.controllers.ViewStockController"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <Label layoutX="256.0" layoutY="73.0" text="Stock">
+      <font>
+         <Font size="20.0" />
+      </font></Label>
+
+    <ListView fx:id="StockItemList" layoutX="187.0" layoutY="118.0" prefHeight="200.0" prefWidth="200.0" />
+    <Button onAction="#handleGoBack" layoutX="14.0" layoutY="14.0" text="Go Back"/>
+    <Button fx:id="modify" layoutX="406.0" layoutY="332.0" onAction="#handleModify" text="Add/Delete Stock Item" />
+</AnchorPane>
