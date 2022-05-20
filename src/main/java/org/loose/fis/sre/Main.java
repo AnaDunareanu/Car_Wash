@@ -23,6 +23,7 @@ public class Main extends Application {
         CarWashService.initDatabase();
         WashTypeService.initDatabase();
         AppointmentService.initDatabase();
+        ClientAppointmentHistoryService.initDatabase();;
     }
 
     private void initDirectory() {

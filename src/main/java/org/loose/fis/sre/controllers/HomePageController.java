@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.model.CarWash;
+import org.loose.fis.sre.services.AppointmentService;
+import org.loose.fis.sre.services.CarWashService;
+import org.loose.fis.sre.services.ClientAppointmentHistoryService;
+import org.loose.fis.sre.services.WashTypeService;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -21,15 +25,13 @@ public class HomePageController {
 
     @FXML
     private Text loggedUser;
-    @FXML
-    private ListView<String> CarWashList;
-
     public void setLoggedUser(String text){
         loggedUser.setText(text);
     }
-    
-    ObjectRepository<CarWash> carwashRepository = getCarWashRepository();
 
+    ObjectRepository<CarWash> carwashRepository = getCarWashRepository();
+    @FXML
+    private ListView<String> CarWashList;
     @FXML
     public void initialize() {
         for (CarWash carwash : carwashRepository.find()) {
@@ -56,6 +58,34 @@ public class HomePageController {
         appStage.setTitle("Car Wash Details");
         appStage.setScene(scene);
         appStage.show();
+    }
+    @FXML
+    private Button history;
+    @FXML
+    public void handleViewHistoryAction(javafx.event.ActionEvent event) throws IOException {
+        ClientAppointmentHistoryService.updateClientAppointmens(loggedUser.getText() );
+        Stage stage= (Stage) history.getScene().getWindow();
+        stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("clientAppointmentHistory.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        ClientAppointmentHistoryController controller = loader.getController();
+        controller.setLoggedUser(loggedUser.getText());
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setTitle("Your Appointment History");
+        appStage.setScene(scene);
+        appStage.show();
+    }
+    @FXML
+    private Button logout;
+    @FXML
+    public void handleLogoutAction() throws IOException {
+        Stage stage= (Stage) logout.getScene().getWindow();
+        stage.close();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
+        stage.setTitle("Car Wash Login or Register");
+        stage.setScene(new Scene(root, 400, 500));
+        stage.show();
     }
 
 }
