@@ -31,12 +31,6 @@ public class ViewStockController {
     private ListView<String> StockItemList;
 
     @FXML
-    private Text stockMessage;
-
-    @FXML
-    private TextField stockItemField;
-
-    @FXML
     private String CarWashName;
 
     @FXML
@@ -78,6 +72,8 @@ public class ViewStockController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("addStock.fxml"));
         Parent login = loader.load();
+        AddStockItemController controller = loader.getController();
+        controller.setCarWashName(CarWashName);
         Scene scene = new Scene(login);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(scene);

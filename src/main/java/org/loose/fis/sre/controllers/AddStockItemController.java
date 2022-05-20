@@ -70,6 +70,8 @@ public class AddStockItemController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("viewStock.fxml"));
         Parent login = loader.load();
+        ViewStockController controller = loader.getController();
+        controller.setCarWashName(CarWashName);
         Scene scene = new Scene(login);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(scene);
