@@ -5,8 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.loose.fis.sre.exceptions.CardDetailsException;
-import org.loose.fis.sre.services.CardDetailsService;
+
 
 public class CardDetailsController {
 

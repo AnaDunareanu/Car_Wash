@@ -5,7 +5,7 @@ public class StockItemDoesNotAlreadyExist extends Exception{
     private String nume;
 
     public StockItemDoesNotAlreadyExist(String nume) {
-        super(String.format("Wash type %s does not exist!", nume));
+        super(String.format("The item %s does not exist in stock!", nume));
         this.nume =nume;
     }
 
