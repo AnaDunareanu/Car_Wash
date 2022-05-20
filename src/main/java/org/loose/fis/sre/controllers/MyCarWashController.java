@@ -43,6 +43,13 @@ public class MyCarWashController {
     private String LoggedUser;
 
     @FXML
+    private Button viewAppointments;
+
+    @FXML
+    private Button logOut;
+
+
+    @FXML
     public void initialize()
     {
         if(getSelectedWashTypesNum()>0) {
@@ -79,5 +86,26 @@ public class MyCarWashController {
         appStage.show();
     }
 
+    @FXML
+    public void handleViewAppointment(javafx.event.ActionEvent event) throws IOException {
+        ViewAppointmentsController.setCarWashName(CarWashName.getText());
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("viewAppointments.fxml"));
+        Parent login = loader.load();
+        Scene scene = new Scene(login);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(scene);
+        appStage.show();
+    }
+
+    @FXML
+    public void handleLogOut(javafx.event.ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("register.fxml"));
+        Parent login = loader.load();
+        Scene scene = new Scene(login);
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        appStage.setScene(scene);
+        appStage.show();
+    }
 
 }
