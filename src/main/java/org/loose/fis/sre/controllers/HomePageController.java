@@ -13,6 +13,7 @@ import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.model.CarWash;
 import org.loose.fis.sre.services.AppointmentService;
 import org.loose.fis.sre.services.CarWashService;
+import org.loose.fis.sre.services.ClientAppointmentHistoryService;
 import org.loose.fis.sre.services.WashTypeService;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class HomePageController {
     public void setLoggedUser(String text){
         loggedUser.setText(text);
     }
-    
+
     ObjectRepository<CarWash> carwashRepository = getCarWashRepository();
     @FXML
     private ListView<String> CarWashList;
@@ -62,6 +63,7 @@ public class HomePageController {
     private Button history;
     @FXML
     public void handleViewHistoryAction(javafx.event.ActionEvent event) throws IOException {
+        ClientAppointmentHistoryService.updateClientAppointmens(loggedUser.getText() );
         Stage stage= (Stage) history.getScene().getWindow();
         stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("clientAppointmentHistory.fxml"));

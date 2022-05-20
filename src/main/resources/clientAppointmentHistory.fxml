@@ -6,5 +6,5 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.ClientAppointmentHistoryController">
 
     <ListView fx:id="ClientAppointmentHistoryList" layoutX="176.0" layoutY="14.0" prefHeight="374.0" prefWidth="247.0" />
-    <Button layoutX="14.0" layoutY="14.0" text="Go back" />
+    <Button onAction="#handleBackAction" layoutX="14.0" layoutY="14.0" text="Go back" />
 </AnchorPane>
