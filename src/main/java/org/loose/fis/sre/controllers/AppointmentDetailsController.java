@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.AppointmentNotAvailableException;
 import org.loose.fis.sre.services.AppointmentService;
 
 import java.io.IOException;
-
 
 public class AppointmentDetailsController {
 
@@ -23,6 +21,9 @@ public class AppointmentDetailsController {
     private Spinner nCoins;
     @FXML
     private Spinner sTime;
+    @FXML
+    private ChoiceBox payment;
+
     private String loggedUser;
     public void setLoggedUser(String text) {
         loggedUser = text;
@@ -43,14 +44,25 @@ public class AppointmentDetailsController {
     public void initialize() {
         nCoins.setValueFactory(nCoinsValueFactory);
         sTime.setValueFactory(sTimeValueFactory);
+        payment.getItems().addAll("Cash", "Card");
     }
     @FXML
     public void handleMakeAppointmentAction(javafx.event.ActionEvent event) {
         try {
-            AppointmentService.addAppointment(loggedUser, selectedCarwash, (Integer) nCoins.getValue(), (Integer) sTime.getValue());
+            AppointmentService.addAppointment(loggedUser, selectedCarwash, (Integer) nCoins.getValue(), (Integer) sTime.getValue(), payment.getSelectionModel().getSelectedItem().toString());
+            System.out.println(payment.getSelectionModel().getSelectedItem());
+            if(payment.getSelectionModel().getSelectedItem().toString().equals("Card")) {
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("cardDetails.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Card Details");
+                stage.setScene(new Scene(root, 400, 200));
+                stage.show();
+            }
             appointmentMessage.setText("Appointment created successfully!");
         } catch (AppointmentNotAvailableException e) {
             appointmentMessage.setText(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     @FXML

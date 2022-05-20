@@ -25,12 +25,12 @@ public class AppointmentService {
         return appointmentRepository;
     }
 
-    public static void addAppointment(String username, String carwash, Integer nCoins, Integer sTime) throws AppointmentNotAvailableException {
+    public static void addAppointment(String username, String carwash, Integer nCoins, Integer sTime, String payment) throws AppointmentNotAvailableException {
         checkAppointmentAvailable(carwash, sTime);
         int nr=1;
         for (Appointment app : appointmentRepository.find())
             nr++;
-        appointmentRepository.insert(new Appointment(nr, username, carwash, nCoins, sTime));
+        appointmentRepository.insert(new Appointment(nr, username, carwash, nCoins, sTime, payment));
     }
     private static void checkAppointmentAvailable(String carwash, Integer sTime) throws AppointmentNotAvailableException {
         for (Appointment app : appointmentRepository.find()) {

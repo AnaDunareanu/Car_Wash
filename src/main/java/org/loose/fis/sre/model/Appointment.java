@@ -9,13 +9,15 @@ public class Appointment {
     private String carwash;
     private Integer nCoins;
     private Integer sTime;
+    private String payment;
 
-    public Appointment(int nr, String username, String carwash, Integer nCoins, Integer sTime) {
+    public Appointment(int nr, String username, String carwash, Integer nCoins, Integer sTime, String payment) {
         this.nr = nr;
         this.username = username;
         this.carwash = carwash;
         this.nCoins = nCoins;
         this.sTime = sTime;
+        this.payment = payment;
     }
 
     public Appointment() {
@@ -56,4 +58,12 @@ public class Appointment {
     public Integer getsTime() { return sTime; }
 
     public void setsTime(Integer sTime) { this.sTime = sTime; }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
 }
