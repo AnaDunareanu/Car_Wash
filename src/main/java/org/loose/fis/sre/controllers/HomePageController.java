@@ -86,9 +86,6 @@ public class HomePageController {
         stage.setTitle("Car Wash Login or Register");
         stage.setScene(new Scene(root, 400, 500));
         stage.show();
-        CarWashService.initDatabase();
-        WashTypeService.initDatabase();
-        AppointmentService.initDatabase();
     }
 
 }
