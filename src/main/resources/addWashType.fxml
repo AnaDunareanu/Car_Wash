@@ -13,10 +13,15 @@
             <Font size="15.0" />
          </font></Label>
 
+      <Label layoutX="99.0" layoutY="136.0" text="Price(RON): " GridPane.columnIndex="10" GridPane.rowIndex="10">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <TextField fx:id="washTypeField" layoutX="204.0" layoutY="89.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-      <Text fx:id="washTypeMessage" layoutX="180.0" layoutY="143.0" wrappingWidth="208.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <Button fx:id="AddWashType" onAction="#handleAddWashType" layoutX="126.0" layoutY="200.0" text="Add" />
-      <Button fx:id="DeleteWashType" onAction="#handleDelete" layoutX="373.0" layoutY="200.0" text="Delete" />
+      <Spinner fx:id="washPrice" layoutX="204.0" layoutY="134.0" prefHeight="25.0" prefWidth="100.0"/>
+      <Text fx:id="washTypeMessage" layoutX="180.0" layoutY="190.0" wrappingWidth="208.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <Button fx:id="AddWashType" onAction="#handleAddWashType" layoutX="126.0" layoutY="230.0" text="Add" />
+      <Button fx:id="DeleteWashType" onAction="#handleDelete" layoutX="373.0" layoutY="230.0" text="Delete" />
       <Button fx:id="GoBack" onAction="#handleGoBack" layoutX="14.0" layoutY="14.0" text="Go Back" />
    </children>
 </AnchorPane>

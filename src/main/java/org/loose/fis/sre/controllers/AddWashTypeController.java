@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,7 +24,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static org.loose.fis.sre.services.UserService.getUserRepository;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypesNum;
 import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
 
 public class AddWashTypeController {
@@ -33,10 +34,9 @@ public class AddWashTypeController {
     @FXML
     private Text washTypeMessage;
 
-    private String CarWashName;
+    private static String CarWashName;
 
-    @FXML
-    public void setCarWashName(String name) {
+    public static void setCarWashName(String name) {
         CarWashName = name;
     }
 
@@ -49,15 +49,24 @@ public class AddWashTypeController {
     @FXML
     private Button GoBack;
 
+    @FXML
+    private Spinner washPrice;
+
+    SpinnerValueFactory<Integer> spinPrice = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,1);
+
+
+    @FXML
+    public void initialize()
+    {
+        washPrice.setValueFactory(spinPrice);
+    }
+
 
 
     @FXML
     public void handleAddWashType(javafx.event.ActionEvent event) {
         try {
-            WashTypeService.addSelectedWashType(washTypeField.getText());
-            for(String washType : WashTypeService.getSelectedWashTypes()){
-                System.out.println(washType);
-            }
+            WashTypeService.addSelectedWashType(washTypeField.getText(),(Integer) washPrice.getValue(),CarWashName);
             washTypeMessage.setText("Wash Type added successfully!");
         } catch (WashTypeAlreadyExists e) {
             washTypeMessage.setText(e.getMessage());
