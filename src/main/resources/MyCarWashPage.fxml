@@ -20,5 +20,6 @@
     <Button fx:id="logOut" onAction="#handleLogOut" layoutX="14.0" layoutY="14.0" text="Log Out" />
    <Button fx:id="modify" layoutX="406.0" layoutY="333.0" onAction="#handleModify" text="Add/Delete Washing Type" />
    <Button fx:id="viewStock" onAction="#handleViewStock" layoutX="61.0" layoutY="333.0" text="View Stock" />
-    <Button  fx:id="viewAppointments" onAction="#handleViewAppointment" layoutX="200.0" layoutY="333.0" text="View Appointments" />
+    <Button  fx:id="History" onAction="#handleClientHistory" layoutX="150.0" layoutY="333.0" text="Client History" />
+    <Button  fx:id="viewAppointments" onAction="#handleViewAppointment" layoutX="260.0" layoutY="333.0" text="View Appointments" />
 </AnchorPane>
