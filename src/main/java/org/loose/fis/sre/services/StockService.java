@@ -4,10 +4,7 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.StockItemAlreadyExists;
 import org.loose.fis.sre.exceptions.StockItemDoesNotAlreadyExist;
-import org.loose.fis.sre.exceptions.WashTypeAlreadyExists;
-import org.loose.fis.sre.exceptions.WashTypeDoesNotAlreadyExists;
 import org.loose.fis.sre.model.Stock;
-import org.loose.fis.sre.model.WashType;
 
 import java.util.Objects;
 
@@ -17,16 +14,9 @@ public class StockService {
 
     private static ObjectRepository<Stock> stockRepository;
 
-    private static String[] selectedStock;
-
-    private static int selectedStockNum=0;
-
-    public static int getSelectedStockNum() {return selectedStockNum;}
-    public static String[] getSelectedStock() {return selectedStock;}
-
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("Stock.db").toFile())
+                .filePath(getPathToFile("stock.db").toFile())
                 .openOrCreate();
 
         stockRepository = database.getRepository(Stock.class);
@@ -36,62 +26,40 @@ public class StockService {
         return stockRepository;
     }
 
-    public static void setSelectedStock(String[] arr, int len)
-    {
-        selectedStock=new String[len];
-        int cnt=0;
-        for(String stockItem:arr)
+
+    public static void addSelectedStock(String stock,String carwashName) throws StockItemAlreadyExists {
+        checkStockItemAlreadyExists(stock,carwashName);
+        int nr=1;
+        for (Stock stk : stockRepository.find())
         {
-            selectedStock[cnt++]=stockItem;
+            nr=stk.getNr();
+            nr++;
         }
-        selectedStockNum=len;
+        stockRepository.insert(new Stock(carwashName,stock,nr));
     }
 
-    public static void addSelectedStock(String stock) throws StockItemAlreadyExists {
-        checkStockItemAlreadyExists(stock);
-        String[] newSelectedStock = new String[getSelectedStockNum() + 1];
-        int cnt=0;
-
-        if(getSelectedStockNum()>0)
-        {
-            for(String selectedItem : selectedStock )
-                newSelectedStock[cnt++] = selectedItem;
+    private static void checkStockItemAlreadyExists(String stockItem,String carwashName) throws StockItemAlreadyExists {
+        for (Stock stk : stockRepository.find()) {
+            if (Objects.equals(stockItem,stk.getStockName()) && Objects.equals(carwashName,stk.getCarWashName()))
+                throw new StockItemAlreadyExists(stockItem);
         }
 
-        newSelectedStock[cnt]=stock;
-
-        setSelectedStock(newSelectedStock, cnt+1);
-    }
-
-    private static void checkStockItemAlreadyExists(String stockItem) throws StockItemAlreadyExists {
-        if(getSelectedStockNum()>0) {
-            for (String itemStock : selectedStock) {
-                if (Objects.equals(itemStock, stockItem))
-                    throw new StockItemAlreadyExists(stockItem);
-            }
-        }
     }
 
     public static void deleteStock(String item) throws StockItemDoesNotAlreadyExist {
         checkStockItemDoesNotExist(item);
-        String[] newSelectedStock = new String[getSelectedStockNum() - 1];
-        int cnt=0;
-
-        if(getSelectedStockNum()>0) {
-            for (String type : selectedStock) {
-                if (!Objects.equals(type, item))
-                    newSelectedStock[cnt++] = type;
+        for (Stock stk : stockRepository.find()) {
+            if (Objects.equals(item, stk.getStockName())) {
+                stockRepository.remove(stk);
             }
         }
-
-        setSelectedStock(newSelectedStock, cnt);
     }
 
-    private static void checkStockItemDoesNotExist(String item) throws StockItemDoesNotAlreadyExist {
-        for (String stk : selectedStock) {
-            if (Objects.equals(stk, item))
-                return;
-        }
+    private static void checkStockItemDoesNotExist (String item) throws StockItemDoesNotAlreadyExist {
+            for (Stock stk : stockRepository.find()) {
+                if (Objects.equals(stk.getStockName(), item))
+                    return;
+            }
         throw new StockItemDoesNotAlreadyExist(item);
     }
 }

@@ -15,15 +15,13 @@ import org.loose.fis.sre.services.StockService;
 
 import java.io.IOException;
 
-import static org.loose.fis.sre.services.StockService.getSelectedStock;
-
 public class AddStockItemController {
 
     @FXML
-    private String CarWashName;
+    private static String CarWashName;
 
     @FXML
-    public void setCarWashName(String name) {
+    public static void setCarWashName(String name) {
         CarWashName = name;
     }
 
@@ -45,10 +43,7 @@ public class AddStockItemController {
     @FXML
     public void handleAddStockItem(javafx.event.ActionEvent event) {
         try {
-            StockService.addSelectedStock(stockItemField.getText());
-            for(String item : getSelectedStock()){
-                System.out.println(item);
-            }
+            StockService.addSelectedStock(stockItemField.getText(),CarWashName);
             stockMessage.setText("Item added successfully in stock!");
         } catch (StockItemAlreadyExists e) {
             stockMessage.setText(e.getMessage());
