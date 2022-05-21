@@ -1,5 +1,6 @@
 package org.loose.fis.sre.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -43,6 +44,9 @@ public class RegistrationController {
     @FXML
     private ChoiceBox role;
 
+    private static String loggedCarWash;
+
+
     @FXML
     public void initialize() {
         role.getItems().addAll("Client", "Admin");
@@ -55,7 +59,6 @@ public class RegistrationController {
         try {
             UserService.addUser(usernameField.getText(), passwordField.getText(), emailField.getText(), (String) role.getValue());
             String username = usernameField.getText();
-
             ObjectRepository<User> userRepository = getUserRepository();
             String role = "";
             for (User user : userRepository.find()) {
@@ -87,7 +90,7 @@ public class RegistrationController {
     private Button but;
 
     @FXML
-    public void handleLoginAction(javafx.event.ActionEvent event)
+    public void handleLoginAction(ActionEvent event)
     {
         try {
             UserService.verifyUser(usernameFieldLogin.getText(), passwordFieldLogin.getText());
@@ -122,8 +125,14 @@ public class RegistrationController {
                 String carWash = "";
                 for (CarWash carWash1 : carWashRepository.find()) {
                     if (Objects.equals(username, carWash1.getAdministrator()))
+                    {
                         carWash = (String) carWash1.getCarWashName();
+                        loggedCarWash=carWash;
+                    }
+
+
                 }
+                MyCarWashController.setLoggedCarWash(loggedCarWash);
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MyCarWashPage.fxml"));
                 Parent login = loader.load();
                 MyCarWashController controller = loader.getController();
