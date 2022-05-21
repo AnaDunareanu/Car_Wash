@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.loose.fis.sre.controllers.ClientHistoryController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <Label layoutX="220.0" layoutY="40.0" text="Client History">
+        <font>
+            <Font size="20.0" />
+        </font></Label>
+    <ListView  fx:id="ClientsList" layoutX="175.0" layoutY="80.0" prefHeight="300.0" prefWidth="220.0"/>
+    <Button  fx:id="GoBack" onAction="#handleGoBack" layoutX="14.0" layoutY="14.0" text="Go Back"/>
+</AnchorPane>
