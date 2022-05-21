@@ -8,6 +8,7 @@ public class CarWash {
     private String administrator;
     private String address;
 
+
     public CarWash(String carwashname, String address, String administartor) {
         this.carwashname = carwashname;
         this.address = address;
@@ -16,6 +17,7 @@ public class CarWash {
 
     public CarWash() {
     }
+
 
     public String getCarWashName() {
         return carwashname;

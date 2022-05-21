@@ -8,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.model.WashType;
 
 import java.io.IOException;
 
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypes;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypesNum;
+import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
 
 public class CarwashDetailsController {
 
@@ -34,12 +35,15 @@ public class CarwashDetailsController {
     public void setAddress(String text) {
         address.setText(text);
     }
+
+    ObjectRepository<WashType> washTypeObjectRepository = getTypeRepository();
+
     @FXML
     public void initialize()
     {
-        if(getSelectedWashTypesNum()>0) {
-            for(String wash :  getSelectedWashTypes())
-                WashTypeList.getItems().add(wash);
+        for(WashType washType:washTypeObjectRepository.find())
+        {
+            WashTypeList.getItems().add(washType.getWashTypeName());
         }
     }
     @FXML

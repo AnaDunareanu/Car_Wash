@@ -4,16 +4,28 @@ import org.dizitart.no2.objects.Id;
 
 public class WashType {
     @Id
+    private int nr;
+    private int price;
     private String carwashname;
     private String nume;
 
-    public WashType(String carwashname, String nume) {
+    public WashType(int nr, int price,String carwashname, String nume) {
+        this.nr = nr;
+        this.price=price;
         this.carwashname = carwashname;
         this.nume = nume;
     }
 
     public WashType() {
     }
+
+    public int getNr() {return nr;}
+
+    public void setNr(int nr) {this.nr = nr;}
+
+    public int getPrice() {return price;}
+
+    public void setPrice(int price) {this.price = price;}
 
     public String getCarWashName() {
         return carwashname;

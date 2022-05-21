@@ -1,8 +1,12 @@
 package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.objects.ObjectFilter;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.dizitart.no2.objects.filters.ObjectFilters;
 import org.loose.fis.sre.exceptions.*;
+import org.loose.fis.sre.model.Appointment;
+import org.loose.fis.sre.model.CarWash;
 import org.loose.fis.sre.model.WashType;
 
 import java.util.Objects;
@@ -14,16 +18,9 @@ public class WashTypeService {
 
     private static ObjectRepository<WashType> typeRepository;
 
-    private static String[] selectedWashTypes;
-
-    private static int selectedWashTypesNum=0;
-
-    public static int getSelectedWashTypesNum() {return selectedWashTypesNum;}
-    public static String[] getSelectedWashTypes() {return selectedWashTypes;}
-
     public static void initDatabase() {
         Nitrite database = Nitrite.builder()
-                .filePath(getPathToFile("WashType.db").toFile())
+                .filePath(getPathToFile("wst.db").toFile())
                 .openOrCreate();
 
        typeRepository = database.getRepository(WashType.class);
@@ -34,61 +31,40 @@ public class WashTypeService {
         return typeRepository;
     }
 
-    public static void setSelectedWashTypes(String[] arr, int len)
-    {
-        selectedWashTypes=new String[len];
-        int cnt=0;
-        for(String washType:arr)
+
+    public static void addSelectedWashType(String washType,int price,String carwashName) throws WashTypeAlreadyExists {
+        checkWashTypeAlreadyExists(washType,carwashName);
+        int nr=1;
+        for (WashType washtype : typeRepository.find())
         {
-            selectedWashTypes[cnt++]=washType;
+            nr=washtype.getNr();
+            nr++;
         }
-        selectedWashTypesNum=len;
+        typeRepository.insert(new WashType(nr, price,carwashName, washType));
     }
 
-    public static void addSelectedWashType(String washType) throws WashTypeAlreadyExists {
-        checkWashTypeAlreadyExists(washType);
-        String[] newSelectedWashTypes = new String[getSelectedWashTypesNum() + 1];
-        int cnt=0;
-
-        if(getSelectedWashTypesNum()>0)
-        {
-            for(String selectedItem : selectedWashTypes )
-                newSelectedWashTypes[cnt++] = selectedItem;
-        }
-
-        newSelectedWashTypes[cnt]=washType;
-
-        setSelectedWashTypes(newSelectedWashTypes, cnt+1);
-
-    }
-
-    private static void checkWashTypeAlreadyExists(String selectedWashType) throws WashTypeAlreadyExists {
-        if(getSelectedWashTypesNum()>0) {
-            for (String washType : selectedWashTypes) {
-                if (Objects.equals(washType, selectedWashType))
-                    throw new WashTypeAlreadyExists(selectedWashType);
-            }
+    private static void checkWashTypeAlreadyExists(String selectedWashType,String carwashName) throws WashTypeAlreadyExists {
+        for (WashType wash : typeRepository.find()) {
+            if (Objects.equals(selectedWashType,wash.getWashTypeName()) && Objects.equals(carwashName,wash.getCarWashName()))
+                throw new WashTypeAlreadyExists(selectedWashType);
         }
     }
 
     public static void deleteWashType(String washType) throws WashTypeDoesNotAlreadyExists {
         checkWashTypeDoesNotExists(washType);
-        String[] newSelectedWashTypes = new String[getSelectedWashTypesNum() - 1];
-        int cnt=0;
-
-        if(getSelectedWashTypesNum()>0) {
-            for (String type : selectedWashTypes) {
-                if (!Objects.equals(type, washType))
-                    newSelectedWashTypes[cnt++] = type;
+        for (WashType wash : typeRepository.find())
+        {
+            if (Objects.equals(washType,wash.getWashTypeName()))
+            {
+                typeRepository.remove(wash);
             }
         }
 
-        setSelectedWashTypes(newSelectedWashTypes, cnt);
     }
 
     private static void checkWashTypeDoesNotExists(String washType) throws WashTypeDoesNotAlreadyExists {
-        for (String wash : selectedWashTypes) {
-            if (Objects.equals(wash, washType))
+        for (WashType wash : typeRepository.find()) {
+            if (Objects.equals(wash.getWashTypeName(), washType))
                 return;
         }
         throw new WashTypeDoesNotAlreadyExists(washType);
