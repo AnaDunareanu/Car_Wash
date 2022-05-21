@@ -11,19 +11,21 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.StockItemAlreadyExists;
 import org.loose.fis.sre.exceptions.StockItemDoesNotAlreadyExist;
 import org.loose.fis.sre.exceptions.WashTypeAlreadyExists;
 import org.loose.fis.sre.exceptions.WashTypeDoesNotAlreadyExists;
+import org.loose.fis.sre.model.Stock;
+import org.loose.fis.sre.model.WashType;
 import org.loose.fis.sre.services.StockService;
 import org.loose.fis.sre.services.WashTypeService;
 
 import java.io.IOException;
+import java.util.Objects;
 
-import static org.loose.fis.sre.services.StockService.getSelectedStock;
-import static org.loose.fis.sre.services.StockService.getSelectedStockNum;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypes;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypesNum;
+import static org.loose.fis.sre.services.StockService.getStockRepository;
+import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
 
 public class ViewStockController {
 
@@ -31,25 +33,33 @@ public class ViewStockController {
     private ListView<String> StockItemList;
 
     @FXML
-    private String CarWashName;
+    private static String CarWashName;
 
     @FXML
-    public void setCarWashName(String name) {
+    public static void setCarWashName(String name) {
         CarWashName = name;
     }
 
     @FXML
     private Button GoBack;
 
+    private static String loggedCarWash;
+
+    public static void setLoggedCarWash(String name){loggedCarWash=name;}
+
     @FXML
     private Button modify;
+
+    ObjectRepository<Stock> stockRepository = getStockRepository();
 
     @FXML
     public void initialize()
     {
-        if(getSelectedStockNum()>0) {
-            for(String item :  getSelectedStock())
-                StockItemList.getItems().add(item);
+        for (Stock stk : stockRepository.find()) {
+            if(Objects.equals(stk.getCarWashName(),CarWashName))
+            {
+                StockItemList.getItems().add(stk.getStockName());
+            }
         }
     }
 
@@ -69,11 +79,9 @@ public class ViewStockController {
 
     @FXML
     public void handleModify(javafx.event.ActionEvent event) throws IOException {
-
+        AddStockItemController.setCarWashName(CarWashName);
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("addStock.fxml"));
         Parent login = loader.load();
-        AddStockItemController controller = loader.getController();
-        controller.setCarWashName(CarWashName);
         Scene scene = new Scene(login);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(scene);

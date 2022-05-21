@@ -4,16 +4,22 @@ import org.dizitart.no2.objects.Id;
 
 public class Stock {
     @Id
+    private int nr;
     private String carwashname;
     private String stockName;
 
-    public Stock(String carwashname, String stockName) {
+    public Stock(String carwashname, String stockName,int nr) {
         this.carwashname = carwashname;
         this.stockName = stockName;
+        this.nr=nr;
     }
 
     public Stock() {
     }
+
+    public int getNr() {return nr;}
+
+    public void setNr(int nr) {this.nr = nr;}
 
     public String getCarWashName() {
         return carwashname;

@@ -87,11 +87,9 @@ public class MyCarWashController {
 
     @FXML
     public void handleViewStock(javafx.event.ActionEvent event) throws IOException {
-
+        ViewStockController.setCarWashName(CarWashName.getText());
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("viewStock.fxml"));
         Parent login = loader.load();
-        ViewStockController controller = loader.getController();
-        controller.setCarWashName(CarWashName.getText());
         Scene scene = new Scene(login);
         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         appStage.setScene(scene);
