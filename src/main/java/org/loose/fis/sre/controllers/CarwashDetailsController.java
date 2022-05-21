@@ -12,6 +12,7 @@ import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.model.WashType;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
 
@@ -35,15 +36,22 @@ public class CarwashDetailsController {
     public void setAddress(String text) {
         address.setText(text);
     }
+    private static String CarWashName;
+    public static void setCarWashName(String name) {
+        CarWashName = name;
+    }
 
-    ObjectRepository<WashType> washTypeObjectRepository = getTypeRepository();
+    ObjectRepository<WashType> washTypeRepository = getTypeRepository();
 
     @FXML
     public void initialize()
     {
-        for(WashType washType:washTypeObjectRepository.find())
-        {
-            WashTypeList.getItems().add(washType.getWashTypeName());
+        for (WashType washType : washTypeRepository.find()) {
+            if(Objects.equals(washType.getCarWashName(),CarWashName))
+            {
+                WashTypeList.getItems().add("Name: " + washType.getWashTypeName() + "\n Price: " +
+                        washType.getPrice() + "RON");
+            }
         }
     }
     @FXML

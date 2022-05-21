@@ -24,8 +24,9 @@ import org.loose.fis.sre.services.WashTypeService;
 import java.io.IOException;
 import java.util.Objects;
 
+
 import static org.loose.fis.sre.services.StockService.getStockRepository;
-import static org.loose.fis.sre.services.WashTypeService.getTypeRepository;
+
 
 public class ViewStockController {
 
