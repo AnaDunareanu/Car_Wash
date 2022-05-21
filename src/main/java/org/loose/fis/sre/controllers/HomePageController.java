@@ -47,6 +47,7 @@ public class HomePageController {
                 address = carwash.getCarWashAdress();
             }
         }
+        CarwashDetailsController.setCarWashName(selectedCarWash);
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("carwashDetails.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);

@@ -22,8 +22,6 @@ import java.io.IOException;
 
 import static org.loose.fis.sre.services.StockService.getSelectedStock;
 import static org.loose.fis.sre.services.StockService.getSelectedStockNum;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypes;
-import static org.loose.fis.sre.services.WashTypeService.getSelectedWashTypesNum;
 
 public class ViewStockController {
 
